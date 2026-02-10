@@ -6,6 +6,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.get("/", (req, res) => {
+  res.send("BFHL API is running successfully");
+});
+
 
 app.get("/health", (req, res) => {
   return res.status(200).json({
