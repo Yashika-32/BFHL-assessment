@@ -6,7 +6,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// ================= HEALTH =================
+
 app.get("/health", (req, res) => {
   return res.status(200).json({
     is_success: true,
@@ -15,7 +15,7 @@ app.get("/health", (req, res) => {
   });
 });
 
-// ================= HELPERS =================
+
 function fibonacci(n) {
   let res = [0, 1];
   for (let i = 2; i < n; i++) {
@@ -45,12 +45,11 @@ function lcm(arr) {
   return arr.reduce((a, b) => (a * b) / gcd(a, b));
 }
 
-// ================= BFHL =================
 app.post("/bfhl", (req, res) => {
   try {
     const body = req.body;
 
-    // Fibonacci
+    
     if (body.fibonacci !== undefined) {
       return res.status(200).json({
         is_success: true,
@@ -59,7 +58,6 @@ app.post("/bfhl", (req, res) => {
       });
     }
 
-    // Prime
     if (body.prime !== undefined) {
       return res.status(200).json({
         is_success: true,
@@ -68,7 +66,7 @@ app.post("/bfhl", (req, res) => {
       });
     }
 
-    // LCM
+    
     if (body.lcm !== undefined) {
       return res.status(200).json({
         is_success: true,
@@ -77,7 +75,6 @@ app.post("/bfhl", (req, res) => {
       });
     }
 
-    // HCF
     if (body.hcf !== undefined) {
       return res.status(200).json({
         is_success: true,
@@ -86,7 +83,6 @@ app.post("/bfhl", (req, res) => {
       });
     }
 
-    // AI (SAFE + INTELLIGENT FALLBACK)
     if (body.AI !== undefined) {
       const question = body.AI.toLowerCase();
 
@@ -101,7 +97,6 @@ app.post("/bfhl", (req, res) => {
         });
       }
 
-      // default single-word AI response
       return res.status(200).json({
         is_success: true,
         official_email: process.env.OFFICIAL_EMAIL,
@@ -109,7 +104,6 @@ app.post("/bfhl", (req, res) => {
       });
     }
 
-    // Invalid request
     return res.status(400).json({
       is_success: false,
       error: "Invalid request format"
@@ -124,7 +118,6 @@ app.post("/bfhl", (req, res) => {
   }
 });
 
-// ================= START =================
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`API Running on port ${PORT}`);
